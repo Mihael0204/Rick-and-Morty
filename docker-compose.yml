@@ -16,7 +16,7 @@ services:
   app:
     depends_on:
       - db
-    image: 'brovkin/rick-and-morty'
+    image: 'mihael0204/rick-and-morty'
     build: .
     env_file: ./.env
     ports:
