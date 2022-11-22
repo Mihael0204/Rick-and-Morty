@@ -39,14 +39,14 @@ class MovieCharacterControllerTest {
 
     @Test
     public void mustReturnRandomCharacter() {
-        MovieCharacter movieCharacter = new MovieCharacter();
-        movieCharacter.setId(1L);
-        movieCharacter.setExternalId(1L);
-        movieCharacter.setName("Rick Sanchez");
-        movieCharacter.setGender(Gender.valueOf("MALE"));
-        movieCharacter.setStatus(Status.valueOf("ALIVE"));
+        MovieCharacter rickSanchez = new MovieCharacter();
+        rickSanchez.setId(1L);
+        rickSanchez.setExternalId(1L);
+        rickSanchez.setName("Rick Sanchez");
+        rickSanchez.setGender(Gender.valueOf("MALE"));
+        rickSanchez.setStatus(Status.valueOf("ALIVE"));
 
-        Mockito.when(service.getRandomCharacter()).thenReturn(movieCharacter);
+        Mockito.when(service.getRandomCharacter()).thenReturn(rickSanchez);
 
         RestAssuredMockMvc.when()
                 .get("/movie-characters/random")

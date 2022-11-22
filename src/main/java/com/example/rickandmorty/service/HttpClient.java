@@ -2,18 +2,17 @@ package com.example.rickandmorty.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
+import lombok.RequiredArgsConstructor;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.springframework.stereotype.Component;
-import lombok.RequiredArgsConstructor;
 
 @Component
 @RequiredArgsConstructor
 public class HttpClient {
     private final CloseableHttpClient closeableHttpClient;
     private final ObjectMapper objectMapper;
-
 
     public <T> T get(String url, Class<T> clazz) {
         HttpGet request = new HttpGet(url);

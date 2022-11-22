@@ -58,7 +58,7 @@ public class MovieCharacterServiceImpl implements MovieCharacterService {
         return movieCharacterRepository.findAllByNameContains(namepart);
     }
 
-    void saveDtosToDB(ApiResponseDto responseDto) {
+    public List<MovieCharacter> saveDtosToDB(ApiResponseDto responseDto) {
         Map<Long, ApiCharacterDto> externalDtos = Arrays.stream(responseDto.getResults())
                 .collect(Collectors.toMap(ApiCharacterDto::getId, Function.identity()));
 
@@ -78,6 +78,6 @@ public class MovieCharacterServiceImpl implements MovieCharacterService {
                 .map(i -> mapper.parseApiCharacterResponseDto(externalDtos.get(i)))
                 .collect(Collectors.toList());
 
-        movieCharacterRepository.saveAll(charactersToSave);
+        return movieCharacterRepository.saveAll(charactersToSave);
     }
 }
