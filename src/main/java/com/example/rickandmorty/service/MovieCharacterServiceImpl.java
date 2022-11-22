@@ -34,7 +34,6 @@ public class MovieCharacterServiceImpl implements MovieCharacterService {
 
     @PostConstruct
     @Scheduled(cron = "0 8 * * * ?")
-    @Override
     public void syncExternalCharacters() {
         log.info("syncExternalCharacters method was invoked at " + LocalDateTime.now());
         ApiResponseDto apiResponseDto = httpClient.get("https://rickandmortyapi.com/api/character",
@@ -59,7 +58,7 @@ public class MovieCharacterServiceImpl implements MovieCharacterService {
         return movieCharacterRepository.findAllByNameContains(namepart);
     }
 
-    void saveDtosToDB(ApiResponseDto responseDto) {
+    public List<MovieCharacter> saveDtosToDB(ApiResponseDto responseDto) {
         Map<Long, ApiCharacterDto> externalDtos = Arrays.stream(responseDto.getResults())
                 .collect(Collectors.toMap(ApiCharacterDto::getId, Function.identity()));
 
@@ -79,6 +78,6 @@ public class MovieCharacterServiceImpl implements MovieCharacterService {
                 .map(i -> mapper.parseApiCharacterResponseDto(externalDtos.get(i)))
                 .collect(Collectors.toList());
 
-        movieCharacterRepository.saveAll(charactersToSave);
+        return movieCharacterRepository.saveAll(charactersToSave);
     }
 }
