@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MovieCharacterMapper {
-
     public MovieCharacter parseApiCharacterResponseDto(ApiCharacterDto dto) {
         MovieCharacter movieCharacter = new MovieCharacter();
         movieCharacter.setName(dto.getName());
